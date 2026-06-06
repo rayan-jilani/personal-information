@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rayan Jilani — Student & Web Developer Portfolio">
+  <title>Rayan Jilani | Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <nav class="nav" id="nav">
+    <a href="#home" class="nav__logo">RJ<span class="nav__dot">.</span></a>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#home" class="nav__link active">Home</a></li>
+      <li><a href="#about" class="nav__link">About</a></li>
+      <li><a href="#skills" class="nav__link">Skills</a></li>
+      <li><a href="#projects" class="nav__link">Projects</a></li>
+      <li><a href="#contact" class="nav__link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero__content">
+        <p class="hero__greeting reveal">Hello, I'm</p>
+        <h1 class="hero__name reveal">
+          Rayan <span class="gradient-text">Jilani</span>
+        </h1>
+        <p class="hero__role reveal">
+          <span id="typedText"></span><span class="typed-cursor">|</span>
+        </p>
+        <p class="hero__desc reveal">
+          A passionate student and aspiring web developer building my first steps in the digital world — one line of code at a time.
+        </p>
+        <div class="hero__cta reveal">
+          <a href="#projects" class="btn btn--primary">View My Work</a>
+          <a href="#contact" class="btn btn--outline">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero__visual reveal">
+        <div class="hero__avatar">
+          <div class="hero__avatar-ring"></div>
+          <div class="hero__avatar-inner">
+            <span class="hero__initials">RJ</span>
+          </div>
+          <div class="hero__orbit hero__orbit--1"></div>
+          <div class="hero__orbit hero__orbit--2"></div>
+          <div class="hero__orbit hero__orbit--3"></div>
+        </div>
+      </div>
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">
+        <span>Scroll</span>
+        <div class="hero__scroll-line"></div>
+      </a>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">About Me</span>
+          <h2 class="section__title">Who I Am</h2>
+        </div>
+        <div class="about__grid">
+          <div class="about__card reveal">
+            <div class="about__icon">🎓</div>
+            <h3>Student</h3>
+            <p>Currently studying and learning every day. I believe education and hands-on practice go hand in hand.</p>
+          </div>
+          <div class="about__card reveal">
+            <div class="about__icon">💻</div>
+            <h3>Web Developer</h3>
+            <p>Just starting my journey in web development. I'm excited to grow my skills and create meaningful projects.</p>
+          </div>
+          <div class="about__card reveal">
+            <div class="about__icon">🚀</div>
+            <h3>Future Goals</h3>
+            <p>Building a strong foundation in HTML, CSS, and JavaScript — with dreams of mastering full-stack development.</p>
+          </div>
+        </div>
+        <div class="about__story reveal">
+          <p>
+            Hi! I'm <strong>Rayan Jilani</strong>, a student with a growing passion for web development. 
+            Though I'm at the beginning of my journey with <em>zero professional experience</em>, 
+            I'm dedicated to learning, experimenting, and turning ideas into beautiful, functional websites. 
+            Every project is a chance to grow — and I'm just getting started.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section section--alt" id="skills">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">Skills</span>
+          <h2 class="section__title">What I'm Learning</h2>
+        </div>
+        <div class="skills__grid">
+          <div class="skill-card reveal" data-skill="85">
+            <div class="skill-card__header">
+              <span class="skill-card__icon">🌐</span>
+              <h3>HTML5</h3>
+            </div>
+            <div class="skill-card__bar">
+              <div class="skill-card__fill"></div>
+            </div>
+          </div>
+          <div class="skill-card reveal" data-skill="80">
+            <div class="skill-card__header">
+              <span class="skill-card__icon">🎨</span>
+              <h3>CSS3</h3>
+            </div>
+            <div class="skill-card__bar">
+              <div class="skill-card__fill"></div>
+            </div>
+          </div>
+          <div class="skill-card reveal" data-skill="65">
+            <div class="skill-card__header">
+              <span class="skill-card__icon">⚡</span>
+              <h3>JavaScript</h3>
+            </div>
+            <div class="skill-card__bar">
+              <div class="skill-card__fill"></div>
+            </div>
+          </div>
+          <div class="skill-card reveal" data-skill="50">
+            <div class="skill-card__header">
+              <span class="skill-card__icon">📱</span>
+              <h3>Responsive Design</h3>
+            </div>
+            <div class="skill-card__bar">
+              <div class="skill-card__fill"></div>
+            </div>
+          </div>
+          <div class="skill-card reveal" data-skill="45">
+            <div class="skill-card__header">
+              <span class="skill-card__icon">🔧</span>
+              <h3>Git & GitHub</h3>
+            </div>
+            <div class="skill-card__bar">
+              <div class="skill-card__fill"></div>
+            </div>
+          </div>
+          <div class="skill-card reveal" data-skill="40">
+            <div class="skill-card__header">
+              <span class="skill-card__icon">✨</span>
+              <h3>UI/UX Basics</h3>
+            </div>
+            <div class="skill-card__bar">
+              <div class="skill-card__fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">Portfolio</span>
+          <h2 class="section__title">My Projects</h2>
+        </div>
+        <div class="projects__grid">
+          <article class="project-card reveal">
+            <div class="project-card__image project-card__image--1">
+              <div class="project-card__overlay">
+                <a href="#" class="project-card__link" aria-label="View project">↗</a>
+              </div>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">HTML / CSS</span>
+              <h3>Personal Portfolio</h3>
+              <p>My very first portfolio website — built from scratch with HTML, CSS, and vanilla JavaScript.</p>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-card__image project-card__image--2">
+              <div class="project-card__overlay">
+                <a href="#" class="project-card__link" aria-label="View project">↗</a>
+              </div>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">Landing Page</span>
+              <h3>Product Landing Page</h3>
+              <p>A clean, responsive landing page design practice project with smooth animations.</p>
+            </div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-card__image project-card__image--3">
+              <div class="project-card__overlay">
+                <a href="#" class="project-card__link" aria-label="View project">↗</a>
+              </div>
+            </div>
+            <div class="project-card__body">
+              <span class="project-card__tag">JavaScript</span>
+              <h3>Interactive To-Do App</h3>
+              <p>A simple to-do list app to practice DOM manipulation and local storage.</p>
+            </div>
+          </article>
+        </div>
+        <p class="projects__note reveal">
+          More projects coming soon as I continue learning! 🌱
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section--alt" id="contact">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">Contact</span>
+          <h2 class="section__title">Let's Connect</h2>
+        </div>
+        <div class="contact__wrapper reveal">
+          <div class="contact__info">
+            <p>I'm open to learning opportunities, collaborations, and friendly conversations about web development.</p>
+            <div class="contact__links">
+              <a href="mailto:rayan.jilani@email.com" class="contact__item">
+                <span class="contact__item-icon">✉️</span>
+                <span>rayan.jilani@email.com</span>
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact__item">
+                <span class="contact__item-icon">🔗</span>
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact__item">
+                <span class="contact__item-icon">💼</span>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+          <form class="contact__form" id="contactForm">
+            <div class="form__group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form__group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form__group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Say hello..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 <strong>Rayan Jilani</strong>. Built with HTML, CSS & JavaScript.</p>
+      <a href="#home" class="footer__top" aria-label="Back to top">↑ Top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
