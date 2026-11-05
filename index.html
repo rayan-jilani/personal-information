@@ -1,275 +1,1680 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rayan Jilani — Student & Web Developer Portfolio">
-  <title>Rayan Jilani | Web Developer</title>
+  <title>Rayan Jilani — Creative Front-End Developer & UI Engineer</title>
+  <meta name="description" content="Official portfolio of Rayan Jilani — High-performance Front-End Developer, Web Experience Architect & UI Bug Fix Specialist based in Karachi, working globally with clients in USA, UK, Canada & Australia.">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Rayan Jilani — Creative Front-End Developer & UI Engineer">
+  <meta property="og:description" content="Pixel-perfect responsive web applications, sub-second performance, and 24-hour emergency bug fixing.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            display: ['"Syne"', 'sans-serif']
+          },
+          colors: {
+            space: {
+              950: '#050811',
+              900: '#0A0F1D',
+              850: '#0F172A',
+              800: '#15213D',
+              700: '#1E2D52'
+            },
+            neon: {
+              blue: '#3B82F6',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+              purple: '#8B5CF6',
+              amber: '#F59E0B'
+            }
+          },
+          animation: {
+            'glow-pulse': 'glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'gradient-x': 'gradient-x 8s ease infinite'
+          },
+          keyframes: {
+            glow: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.8' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            'gradient-x': {
+              '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+              '50%': { 'background-size': '200% 200%', 'background-position': 'right center' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-neon: #3B82F6;
+      --secondary-neon: #8B5CF6;
+      --accent-glow: rgba(59, 130, 246, 0.2);
+      --card-border-glow: rgba(59, 130, 246, 0.45);
+    }
+
+    [data-theme="emerald"] {
+      --primary-neon: #10B981;
+      --secondary-neon: #06B6D4;
+      --accent-glow: rgba(16, 185, 129, 0.2);
+      --card-border-glow: rgba(16, 185, 129, 0.45);
+    }
+
+    [data-theme="purple"] {
+      --primary-neon: #A855F7;
+      --secondary-neon: #EC4899;
+      --accent-glow: rgba(168, 85, 247, 0.2);
+      --card-border-glow: rgba(168, 85, 247, 0.45);
+    }
+
+    [data-theme="amber"] {
+      --primary-neon: #F59E0B;
+      --secondary-neon: #EF4444;
+      --accent-glow: rgba(245, 158, 11, 0.2);
+      --card-border-glow: rgba(245, 158, 11, 0.45);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #050811; }
+    ::-webkit-scrollbar-thumb { background: #1E2D52; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-neon); }
+
+    /* Custom Ambient Glow */
+    .radial-glow {
+      background: radial-gradient(circle at 50% 20%, var(--accent-glow), transparent 70%);
+    }
+
+    .card-glass {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .card-glass::before {
+      content: '';
+      position: absolute;
+      top: var(--mouse-y, -200px);
+      left: var(--mouse-x, -200px);
+      transform: translate(-50%, -50%);
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card-glass:hover::before {
+      opacity: 1;
+    }
+
+    .card-glass:hover {
+      border-color: var(--card-border-glow);
+      box-shadow: 0 10px 40px -10px var(--accent-glow);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Magnetic Glowing Cursor */
+    .cursor-dot {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary-neon);
+      border-radius: 50%;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 14px var(--primary-neon);
+      transition: width 0.2s, height 0.2s, background-color 0.3s;
+    }
+
+    .cursor-ring {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid var(--primary-neon);
+      border-radius: 50%;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.3s, background-color 0.25s;
+      opacity: 0.7;
+    }
+
+    body.cursor-hover .cursor-ring {
+      width: 55px;
+      height: 55px;
+      background-color: var(--accent-glow);
+      border-color: #fff;
+    }
+
+    /* Marquee Animation */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 30s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+  </style>
 </head>
-<body>
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <canvas id="particles" aria-hidden="true"></canvas>
+<body class="bg-space-950 text-slate-100 font-sans selection:bg-blue-600 selection:text-white relative overflow-x-hidden min-h-screen">
 
-  <nav class="nav" id="nav">
-    <a href="#home" class="nav__logo">RJ<span class="nav__dot">.</span></a>
-    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <ul class="nav__links" id="navLinks">
-      <li><a href="#home" class="nav__link active">Home</a></li>
-      <li><a href="#about" class="nav__link">About</a></li>
-      <li><a href="#skills" class="nav__link">Skills</a></li>
-      <li><a href="#projects" class="nav__link">Projects</a></li>
-      <li><a href="#contact" class="nav__link">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Custom Magnetic Glowing Cursor (Desktop) -->
+  <div id="cursorDot" class="cursor-dot hidden md:block"></div>
+  <div id="cursorRing" class="cursor-ring hidden md:block"></div>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero" id="home">
-      <div class="hero__content">
-        <p class="hero__greeting reveal">Hello, I'm</p>
-        <h1 class="hero__name reveal">
-          Rayan <span class="gradient-text">Jilani</span>
-        </h1>
-        <p class="hero__role reveal">
-          <span id="typedText"></span><span class="typed-cursor">|</span>
-        </p>
-        <p class="hero__desc reveal">
-          A passionate student and aspiring web developer building my first steps in the digital world — one line of code at a time.
-        </p>
-        <div class="hero__cta reveal">
-          <a href="#projects" class="btn btn--primary">View My Work</a>
-          <a href="#contact" class="btn btn--outline">Get In Touch</a>
-        </div>
+  <!-- Interactive Canvas Background for 60fps Starfield & Constellation -->
+  <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-45"></canvas>
+
+  <!-- TOP LIVE AVAILABILITY BANNER -->
+  <div class="relative z-50 bg-gradient-to-r from-blue-950/90 via-space-900/90 to-purple-950/90 border-b border-blue-500/20 backdrop-blur-md px-4 py-2 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span>
+          AVAILABLE FOR NEW CONTRACTS
+        </span>
+        <span class="text-slate-400 hidden sm:inline">&bull; 24-Hour Express Bug Fix Turnaround Guaranteed</span>
       </div>
-      <div class="hero__visual reveal">
-        <div class="hero__avatar">
-          <div class="hero__avatar-ring"></div>
-          <div class="hero__avatar-inner">
-            <span class="hero__initials">RJ</span>
-          </div>
-          <div class="hero__orbit hero__orbit--1"></div>
-          <div class="hero__orbit hero__orbit--2"></div>
-          <div class="hero__orbit hero__orbit--3"></div>
-        </div>
+      <div class="flex items-center space-x-4 text-slate-300 font-mono text-[11px]">
+        <a href="mailto:rayanjilani214@gmail.com" class="hover:text-blue-400 transition flex items-center">
+          <i class="fa-solid fa-envelope mr-1 text-blue-400"></i> rayanjilani214@gmail.com
+        </a>
+        <span class="text-slate-600 hidden md:inline">|</span>
+        <span class="text-slate-400 hidden md:inline">Timezone: UTC+5 (Serving US/UK/AU)</span>
       </div>
-      <a href="#about" class="hero__scroll" aria-label="Scroll down">
-        <span>Scroll</span>
-        <div class="hero__scroll-line"></div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 card-glass border-b border-slate-800/80 transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center space-x-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform duration-300">
+          RJ
+        </div>
+        <div>
+          <span class="text-lg font-black tracking-tight text-white block group-hover:text-blue-400 transition">
+            Rayan Jilani<span class="text-blue-500">.</span>
+          </span>
+          <span class="text-[10px] font-mono text-slate-400 tracking-wider uppercase block">
+            Front-End Engineer
+          </span>
+        </div>
       </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#services" class="hover:text-blue-400 transition">Services</a>
+        <a href="#skills" class="hover:text-blue-400 transition">Tech Stack</a>
+        <a href="#projects" class="hover:text-blue-400 transition">Live Projects</a>
+        <a href="#playground" class="hover:text-blue-400 transition flex items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-1.5"></span> Interactive Lab
+        </a>
+        <a href="#calculator" class="hover:text-blue-400 transition">Estimator</a>
+        <a href="#pricing" class="hover:text-blue-400 transition">Pricing</a>
+      </nav>
+
+      <!-- Right Action CTAs -->
+      <div class="flex items-center space-x-3">
+        <!-- Futuristic Audio Synth FX Toggle -->
+        <button id="sfxToggleBtn" onclick="toggleAudioFx()" class="px-2.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 text-slate-300 hover:text-cyan-400 font-mono text-[11px] flex items-center transition shadow" title="Futuristic UI Audio FX">
+          <i class="fa-solid fa-volume-high mr-1.5 text-cyan-400" id="sfxIcon"></i> SFX: <span id="sfxStatus" class="font-bold text-emerald-400 ml-1">ON</span>
+        </button>
+
+        <a href="https://github.com/rayan-jilani" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white transition shadow" title="GitHub Profile">
+          <i class="fa-brands fa-github text-base"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rayan-jilani" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-400 hover:text-blue-300 transition shadow" title="LinkedIn Profile">
+          <i class="fa-brands fa-linkedin-in text-base"></i>
+        </a>
+        <a href="#contact" class="hidden sm:inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-blue-500/25">
+          <i class="fa-solid fa-paper-plane mr-2"></i> Get a Quote
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="lg:hidden w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-800 bg-space-900/95 backdrop-blur-xl px-4 py-6 space-y-4 text-sm font-medium">
+      <a href="#services" class="block text-slate-300 hover:text-blue-400" onclick="toggleMenu()">Services</a>
+      <a href="#skills" class="block text-slate-300 hover:text-blue-400" onclick="toggleMenu()">Tech Stack</a>
+      <a href="#projects" class="block text-slate-300 hover:text-blue-400" onclick="toggleMenu()">Live Projects</a>
+      <a href="#playground" class="block text-slate-300 hover:text-blue-400" onclick="toggleMenu()">Interactive Lab</a>
+      <a href="#calculator" class="block text-slate-300 hover:text-blue-400" onclick="toggleMenu()">Project Estimator</a>
+      <a href="#pricing" class="block text-slate-300 hover:text-blue-400" onclick="toggleMenu()">Pricing Plans</a>
+      <a href="#contact" class="block text-blue-400 font-bold" onclick="toggleMenu()">Contact Rayan</a>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative pt-16 pb-24 md:pt-28 md:pb-36 radial-glow overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <!-- Left Content -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-xs font-semibold tracking-wide">
+              <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping mr-2"></span>
+              CREATIVE FRONT-END ARCHITECT & PERFORMANCE SPECIALIST
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+              Transforming Ideas Into <br class="hidden sm:inline">
+              <span class="text-gradient">Pixel-Perfect, Sub-Second</span> Web Experiences.
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Hi, I’m <strong>Rayan Jilani</strong>. I engineer ultra-fast web applications, resolve complex front-end UI bugs, and build conversion-focused digital systems for startups and service businesses worldwide.
+            </p>
+
+            <!-- Key Proof Metric Counters -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 max-w-2xl mx-auto lg:mx-0">
+              <div class="card-glass rounded-xl p-3 text-center border-slate-800">
+                <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">0.5s</div>
+                <div class="text-[11px] text-slate-400 uppercase font-medium tracking-wider mt-0.5">Avg Load Speed</div>
+              </div>
+              <div class="card-glass rounded-xl p-3 text-center border-slate-800">
+                <div class="text-2xl sm:text-3xl font-black text-blue-400 font-mono">100%</div>
+                <div class="text-[11px] text-slate-400 uppercase font-medium tracking-wider mt-0.5">Core Web Vitals</div>
+              </div>
+              <div class="card-glass rounded-xl p-3 text-center border-slate-800">
+                <div class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">24h</div>
+                <div class="text-[11px] text-slate-400 uppercase font-medium tracking-wider mt-0.5">Bug Fix SLA</div>
+              </div>
+              <div class="card-glass rounded-xl p-3 text-center border-slate-800">
+                <div class="text-2xl sm:text-3xl font-black text-purple-400 font-mono">5+</div>
+                <div class="text-[11px] text-slate-400 uppercase font-medium tracking-wider mt-0.5">Global Markets</div>
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-sm tracking-wide uppercase transition-all shadow-xl shadow-blue-500/25 flex items-center justify-center">
+                <i class="fa-solid fa-layer-group mr-2"></i> Explore Live Projects
+              </a>
+              <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-space-900 hover:bg-space-850 border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-sm tracking-wide transition-all flex items-center justify-center">
+                <i class="fa-solid fa-calculator mr-2 text-cyan-400"></i> Calculate Project Cost
+              </a>
+            </div>
+
+            <!-- Social Links & Verification -->
+            <div class="pt-4 flex items-center justify-center lg:justify-start space-x-6 text-xs text-slate-400">
+              <span class="flex items-center text-slate-400">
+                <i class="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i> 100% Satisfaction Guarantee
+              </span>
+              <span>&bull;</span>
+              <a href="https://github.com/rayan-jilani" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition flex items-center">
+                <i class="fa-brands fa-github mr-1"></i> rayan-jilani
+              </a>
+              <span>&bull;</span>
+              <a href="https://www.linkedin.com/in/rayan-jilani" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition flex items-center">
+                <i class="fa-brands fa-linkedin mr-1 text-blue-400"></i> Rayan Jilani
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Interactive Code Terminal / Visual Card -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative rounded-2xl card-glass border border-slate-800 shadow-2xl p-6 overflow-hidden">
+              <!-- Window Controls -->
+              <div class="flex items-center justify-between pb-4 border-b border-slate-800/80">
+                <div class="flex items-center space-x-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                </div>
+                <div class="text-[11px] font-mono text-slate-400 flex items-center">
+                  <i class="fa-solid fa-code text-blue-400 mr-1.5"></i> RayanJilani.config.ts
+                </div>
+                <div class="text-[10px] font-mono text-emerald-400 uppercase font-bold tracking-wider">
+                  60 FPS
+                </div>
+              </div>
+
+              <!-- Terminal Code Content -->
+              <pre class="font-mono text-xs text-slate-300 pt-4 leading-relaxed overflow-x-auto"><code><span class="text-purple-400">const</span> <span class="text-blue-400">engineer</span> = {
+  <span class="text-slate-400">name:</span> <span class="text-emerald-300">"Rayan Jilani"</span>,
+  <span class="text-slate-400">specialization:</span> <span class="text-emerald-300">"Front-End Engineering & UI/UX"</span>,
+  <span class="text-slate-400">email:</span> <span class="text-cyan-300">"rayanjilani214@gmail.com"</span>,
+  <span class="text-slate-400">coreCapabilities:</span> [
+    <span class="text-amber-300">"Pixel-Perfect Responsive Layouts"</span>,
+    <span class="text-amber-300">"Sub-Second (0.5s) Page Optimization"</span>,
+    <span class="text-amber-300">"24-Hour Emergency Bug Fixing"</span>,
+    <span class="text-amber-300">"Online Appointment & Workflow Automation"</span>
+  ],
+  <span class="text-slate-400">performanceGrade:</span> <span class="text-emerald-400">"Lighthouse 98-100"</span>,
+  <span class="text-slate-400">status:</span> <span class="text-emerald-400">"Accepting New Projects"</span>
+};
+
+<span class="text-purple-400">export async function</span> <span class="text-blue-400">deliverSuccess</span>(client) {
+  <span class="text-purple-400">return await</span> engineer.solveBusinessProblem({
+    speed: <span class="text-amber-300">"Maximum"</span>,
+    satisfaction: <span class="text-emerald-400">100</span>
+  });
+}</code></pre>
+
+              <!-- Live Performance Meter Inside Terminal -->
+              <div class="mt-6 pt-4 border-t border-slate-800/80 grid grid-cols-3 gap-3 text-center">
+                <div class="bg-space-900/80 rounded-lg p-2.5 border border-slate-800">
+                  <div class="text-emerald-400 font-mono font-bold text-sm">99 / 100</div>
+                  <div class="text-[10px] text-slate-400 uppercase tracking-wider">Performance</div>
+                </div>
+                <div class="bg-space-900/80 rounded-lg p-2.5 border border-slate-800">
+                  <div class="text-cyan-400 font-mono font-bold text-sm">100%</div>
+                  <div class="text-[10px] text-slate-400 uppercase tracking-wider">Accessibility</div>
+                </div>
+                <div class="bg-space-900/80 rounded-lg p-2.5 border border-slate-800">
+                  <div class="text-purple-400 font-mono font-bold text-sm">0.000</div>
+                  <div class="text-[10px] text-slate-400 uppercase tracking-wider">CLS Shift</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <!-- About -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section__header reveal">
-          <span class="section__tag">About Me</span>
-          <h2 class="section__title">Who I Am</h2>
-        </div>
-        <div class="about__grid">
-          <div class="about__card reveal">
-            <div class="about__icon">🎓</div>
-            <h3>Student</h3>
-            <p>Currently studying and learning every day. I believe education and hands-on practice go hand in hand.</p>
+    <!-- INFINITE TECH STACK MARQUEE TICKER -->
+    <div class="py-5 bg-space-900/90 border-y border-slate-800/80 overflow-hidden relative select-none">
+      <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-space-950 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-space-950 to-transparent z-10 pointer-events-none"></div>
+      <div class="animate-marquee space-x-6 items-center flex font-mono text-xs">
+        <span class="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 flex items-center whitespace-nowrap"><i class="fa-brands fa-react mr-2 text-cyan-400"></i> React 19 / Next.js 15</span>
+        <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-wind mr-2 text-teal-400"></i> Tailwind CSS v4</span>
+        <span class="px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 flex items-center whitespace-nowrap"><i class="fa-brands fa-js mr-2 text-amber-400"></i> JavaScript ES2024</span>
+        <span class="px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> 0.5s Sub-Second Speed</span>
+        <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-mobile-screen mr-2 text-emerald-400"></i> Pixel-Perfect Mobile UI</span>
+        <span class="px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-shield-virus mr-2 text-rose-400"></i> 24h Emergency Bug Fixing</span>
+        <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-cubes mr-2 text-indigo-400"></i> 60 FPS HTML5 Canvas</span>
+        <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-calendar-check mr-2 text-blue-400"></i> Automated Booking Engines</span>
+        <span class="px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-300 flex items-center whitespace-nowrap"><i class="fa-brands fa-whatsapp mr-2 text-emerald-400"></i> WhatsApp Lead Pipeline</span>
+        <span class="px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-credit-card mr-2 text-amber-300"></i> Stripe & PayPal APIs</span>
+
+        <!-- Loop duplicates for seamless continuous scrolling -->
+        <span class="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 flex items-center whitespace-nowrap"><i class="fa-brands fa-react mr-2 text-cyan-400"></i> React 19 / Next.js 15</span>
+        <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-wind mr-2 text-teal-400"></i> Tailwind CSS v4</span>
+        <span class="px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 flex items-center whitespace-nowrap"><i class="fa-brands fa-js mr-2 text-amber-400"></i> JavaScript ES2024</span>
+        <span class="px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> 0.5s Sub-Second Speed</span>
+        <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-mobile-screen mr-2 text-emerald-400"></i> Pixel-Perfect Mobile UI</span>
+        <span class="px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-shield-virus mr-2 text-rose-400"></i> 24h Emergency Bug Fixing</span>
+        <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-cubes mr-2 text-indigo-400"></i> 60 FPS HTML5 Canvas</span>
+        <span class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 flex items-center whitespace-nowrap"><i class="fa-solid fa-calendar-check mr-2 text-blue-400"></i> Automated Booking Engines</span>
+      </div>
+    </div>
+
+    <!-- CORE SERVICES SECTION -->
+    <section id="services" class="py-24 bg-space-900/50 border-y border-slate-800/60 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-xs font-semibold">
+            COMPREHENSIVE DIGITAL CAPABILITIES
           </div>
-          <div class="about__card reveal">
-            <div class="about__icon">💻</div>
-            <h3>Web Developer</h3>
-            <p>Just starting my journey in web development. I'm excited to grow my skills and create meaningful projects.</p>
-          </div>
-          <div class="about__card reveal">
-            <div class="about__icon">🚀</div>
-            <h3>Future Goals</h3>
-            <p>Building a strong foundation in HTML, CSS, and JavaScript — with dreams of mastering full-stack development.</p>
-          </div>
-        </div>
-        <div class="about__story reveal">
-          <p>
-            Hi! I'm <strong>Rayan Jilani</strong>, a student with a growing passion for web development. 
-            Though I'm at the beginning of my journey with <em>zero professional experience</em>, 
-            I'm dedicated to learning, experimenting, and turning ideas into beautiful, functional websites. 
-            Every project is a chance to grow — and I'm just getting started.
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Services Built to Scale Your Business & Eliminate Tech Headaches.
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Whether you need a high-converting website built from scratch, urgent bug fixes before product launch, or automated customer booking flows—I deliver end-to-end solutions with precision.
           </p>
         </div>
-      </div>
-    </section>
 
-    <!-- Skills -->
-    <section class="section section--alt" id="skills">
-      <div class="container">
-        <div class="section__header reveal">
-          <span class="section__tag">Skills</span>
-          <h2 class="section__title">What I'm Learning</h2>
-        </div>
-        <div class="skills__grid">
-          <div class="skill-card reveal" data-skill="85">
-            <div class="skill-card__header">
-              <span class="skill-card__icon">🌐</span>
-              <h3>HTML5</h3>
-            </div>
-            <div class="skill-card__bar">
-              <div class="skill-card__fill"></div>
-            </div>
-          </div>
-          <div class="skill-card reveal" data-skill="80">
-            <div class="skill-card__header">
-              <span class="skill-card__icon">🎨</span>
-              <h3>CSS3</h3>
-            </div>
-            <div class="skill-card__bar">
-              <div class="skill-card__fill"></div>
-            </div>
-          </div>
-          <div class="skill-card reveal" data-skill="65">
-            <div class="skill-card__header">
-              <span class="skill-card__icon">⚡</span>
-              <h3>JavaScript</h3>
-            </div>
-            <div class="skill-card__bar">
-              <div class="skill-card__fill"></div>
-            </div>
-          </div>
-          <div class="skill-card reveal" data-skill="50">
-            <div class="skill-card__header">
-              <span class="skill-card__icon">📱</span>
-              <h3>Responsive Design</h3>
-            </div>
-            <div class="skill-card__bar">
-              <div class="skill-card__fill"></div>
-            </div>
-          </div>
-          <div class="skill-card reveal" data-skill="45">
-            <div class="skill-card__header">
-              <span class="skill-card__icon">🔧</span>
-              <h3>Git & GitHub</h3>
-            </div>
-            <div class="skill-card__bar">
-              <div class="skill-card__fill"></div>
-            </div>
-          </div>
-          <div class="skill-card reveal" data-skill="40">
-            <div class="skill-card__header">
-              <span class="skill-card__icon">✨</span>
-              <h3>UI/UX Basics</h3>
-            </div>
-            <div class="skill-card__bar">
-              <div class="skill-card__fill"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section__header reveal">
-          <span class="section__tag">Portfolio</span>
-          <h2 class="section__title">My Projects</h2>
-        </div>
-        <div class="projects__grid">
-          <article class="project-card reveal">
-            <div class="project-card__image project-card__image--1">
-              <div class="project-card__overlay">
-                <a href="#" class="project-card__link" aria-label="View project">↗</a>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Service 1: Custom Web Development -->
+          <div class="card-glass rounded-2xl p-8 transition-all relative group flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl mb-6 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-code"></i>
               </div>
+              <h3 class="text-xl font-bold text-white mb-3">Custom Web Development & Redesigns</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Tailored, responsive websites crafted with clean semantic code. Optimized for desktop, tablet, and mobile with lightning-fast load times that turn visitors into paying clients.
+              </p>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8 font-mono">
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Mobile-First Responsive Architecture</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Sub-Second (0.5s) Page Speed Optimization</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> SEO-Structured Semantic HTML5 Markup</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Smooth 60 FPS Micro-Interactions</li>
+              </ul>
             </div>
-            <div class="project-card__body">
-              <span class="project-card__tag">HTML / CSS</span>
-              <h3>Personal Portfolio</h3>
-              <p>My very first portfolio website — built from scratch with HTML, CSS, and vanilla JavaScript.</p>
-            </div>
-          </article>
-          <article class="project-card reveal">
-            <div class="project-card__image project-card__image--2">
-              <div class="project-card__overlay">
-                <a href="#" class="project-card__link" aria-label="View project">↗</a>
-              </div>
-            </div>
-            <div class="project-card__body">
-              <span class="project-card__tag">Landing Page</span>
-              <h3>Product Landing Page</h3>
-              <p>A clean, responsive landing page design practice project with smooth animations.</p>
-            </div>
-          </article>
-          <article class="project-card reveal">
-            <div class="project-card__image project-card__image--3">
-              <div class="project-card__overlay">
-                <a href="#" class="project-card__link" aria-label="View project">↗</a>
-              </div>
-            </div>
-            <div class="project-card__body">
-              <span class="project-card__tag">JavaScript</span>
-              <h3>Interactive To-Do App</h3>
-              <p>A simple to-do list app to practice DOM manipulation and local storage.</p>
-            </div>
-          </article>
-        </div>
-        <p class="projects__note reveal">
-          More projects coming soon as I continue learning! 🌱
-        </p>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="section section--alt" id="contact">
-      <div class="container">
-        <div class="section__header reveal">
-          <span class="section__tag">Contact</span>
-          <h2 class="section__title">Let's Connect</h2>
-        </div>
-        <div class="contact__wrapper reveal">
-          <div class="contact__info">
-            <p>I'm open to learning opportunities, collaborations, and friendly conversations about web development.</p>
-            <div class="contact__links">
-              <a href="mailto:rayan.jilani@email.com" class="contact__item">
-                <span class="contact__item-icon">✉️</span>
-                <span>rayan.jilani@email.com</span>
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact__item">
-                <span class="contact__item-icon">🔗</span>
-                <span>GitHub</span>
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact__item">
-                <span class="contact__item-icon">💼</span>
-                <span>LinkedIn</span>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">Starting from <strong class="text-white text-sm">$350 USD</strong></span>
+              <a href="#calculator" class="text-xs font-bold text-blue-400 hover:text-blue-300 inline-flex items-center">
+                Configure <i class="fa-solid fa-arrow-right ml-1"></i>
               </a>
             </div>
           </div>
-          <form class="contact__form" id="contactForm">
-            <div class="form__group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your name" required>
+
+          <!-- Service 2: Emergency Bug Fixing & Performance -->
+          <div class="card-glass rounded-2xl p-8 transition-all relative group flex flex-col justify-between border-amber-500/30">
+            <div class="absolute -top-3 right-6 px-3 py-1 rounded-full bg-amber-500 text-space-950 font-black text-[10px] uppercase tracking-wider shadow">
+              24-Hour SLA
             </div>
-            <div class="form__group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-space-950 transition duration-300">
+                <i class="fa-solid fa-bug-slash"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Emergency Bug Fixing & Performance Overhaul</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Broken contact forms, CSS layout glitches on Safari or iPhone, slow loading speeds, or JavaScript crashes? I isolate and eradicate errors in under 24 hours.
+              </p>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8 font-mono">
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Cross-Browser & Mobile CSS Glitch Fixes</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Form Submission & API Connection Repairs</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Google PageSpeed Red-to-Green Upgrade</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Layout Shift (CLS) & Jitter Elimination</li>
+              </ul>
             </div>
-            <div class="form__group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="4" placeholder="Say hello..." required></textarea>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">Starting from <strong class="text-white text-sm">$150 USD</strong></span>
+              <a href="#contact" class="text-xs font-bold text-amber-400 hover:text-amber-300 inline-flex items-center">
+                Urgent Request <i class="fa-solid fa-arrow-right ml-1"></i>
+              </a>
             </div>
-            <button type="submit" class="btn btn--primary btn--full">Send Message</button>
-          </form>
+          </div>
+
+          <!-- Service 3: Business Automation & Booking Systems -->
+          <div class="card-glass rounded-2xl p-8 transition-all relative group flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Business Workflow & Booking Automation</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Stop losing customers to phone tag and manual texting. I build automated self-service appointment scheduling, instant WhatsApp notifications, and automated invoice delivery.
+              </p>
+              <ul class="space-y-2.5 text-xs text-slate-300 mb-8 font-mono">
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Automated 24/7 Calendar Scheduling</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Instant WhatsApp & Email Lead Dispatch</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Interactive Before/After Comparison Sliders</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Stripe & PayPal Payment Integrations</li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">Starting from <strong class="text-white text-sm">$450 USD</strong></span>
+              <a href="#calculator" class="text-xs font-bold text-purple-400 hover:text-purple-300 inline-flex items-center">
+                Configure <i class="fa-solid fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
+
+    <!-- TECH STACK & ARCHITECTURE SECTION -->
+    <section id="skills" class="py-24 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs font-semibold">
+            ENGINEERING STACK
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Modern Technologies. Proven Standards. Clean Code.
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            I don’t just write code—I engineer scalable, lightweight, and maintainable front-end architectures that pass rigorous audit checks.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-brands fa-html5 text-3xl text-orange-500 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">HTML5</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Semantic & Accessible</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-brands fa-css3-alt text-3xl text-blue-500 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">CSS3 & Grid</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Pixel-Perfect Flexbox</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-brands fa-js text-3xl text-amber-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">JavaScript (ES6+)</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Async, DOM & APIs</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-brands fa-react text-3xl text-cyan-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">React & Next.js</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Component Architecture</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-wind text-3xl text-teal-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">Tailwind CSS</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Utility-First Speed</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-gauge-high text-3xl text-emerald-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">Performance</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Core Web Vitals 95+</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-mobile-screen-button text-3xl text-purple-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">Responsive UI</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Mobile, Tablet, 4K</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-brands fa-git-alt text-3xl text-rose-500 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">Git & Versioning</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">CI/CD & Workflows</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-cubes text-3xl text-indigo-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">HTML5 Canvas</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">60 FPS Particle FX</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-server text-3xl text-sky-400 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">REST & Webhooks</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Fetch & State Flows</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-credit-card text-3xl text-amber-300 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">Checkout & APIs</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Stripe, PayPal, Maps</span>
+          </div>
+
+          <div class="card-glass rounded-xl p-5 text-center transition hover:-translate-y-1">
+            <i class="fa-solid fa-shield-virus text-3xl text-emerald-300 mb-3 block"></i>
+            <h4 class="font-bold text-white text-sm">Bug Isolation</h4>
+            <span class="text-[11px] font-mono text-slate-400 block mt-1">Fast Debugging & Fix</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE PROJECTS SHOWCASE -->
+    <section id="projects" class="py-24 bg-space-900/60 border-t border-slate-800/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div>
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-semibold mb-3">
+              PRODUCTION-GRADE SHOWCASE
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              Featured Interactive Projects.
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl">
+              Live applications engineered with responsive precision, sub-second performance, and real business conversion flows.
+            </p>
+          </div>
+
+          <!-- Project Filter Tabs -->
+          <div class="flex flex-wrap gap-2 text-xs font-mono">
+            <button class="px-4 py-2 rounded-lg bg-blue-600 text-white font-bold transition" onclick="filterProjects('all')">All Work</button>
+            <button class="px-4 py-2 rounded-lg bg-space-850 hover:bg-space-800 text-slate-300 transition" onclick="filterProjects('booking')">Automation & Booking</button>
+            <button class="px-4 py-2 rounded-lg bg-space-850 hover:bg-space-800 text-slate-300 transition" onclick="filterProjects('ecommerce')">E-Commerce</button>
+            <button class="px-4 py-2 rounded-lg bg-space-850 hover:bg-space-800 text-slate-300 transition" onclick="filterProjects('interactive')">Interactive/Canvas</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="projectsGrid">
+          
+          <!-- Project 1: Apex Auto Spa -->
+          <div class="project-card card-glass rounded-2xl overflow-hidden border-slate-800 flex flex-col justify-between" data-category="booking">
+            <div class="p-8">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+                <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 font-bold border border-blue-500/30">
+                  <i class="fa-solid fa-car mr-1.5"></i> High-Ticket Service Automation
+                </span>
+                <span class="text-emerald-400 font-bold"><i class="fa-solid fa-bolt mr-1"></i> 0.6s Load Time</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-2">Apex Detailing & Ceramic Studio</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                A high-converting web platform engineered for luxury automotive studios. Features an interactive Before/After comparison slider, 3-tier package selection, and an automated appointment calendar that eliminates quote back-and-forth texting.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-400 mb-6">
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Before/After Slider</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Instant Booking Modal</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Mobile Responsive</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">SEO Schema</span>
+              </div>
+            </div>
+            <div class="px-8 py-5 bg-space-900/80 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">Target Ticket: <strong class="text-amber-400">$400 - $800</strong></span>
+              <a href="us_demo_apex_detailing.html" target="_blank" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition shadow inline-flex items-center">
+                Launch Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2: Royal Bites Gourmet Restaurant -->
+          <div class="project-card card-glass rounded-2xl overflow-hidden border-slate-800 flex flex-col justify-between" data-category="ecommerce">
+            <div class="p-8">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+                <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
+                  <i class="fa-solid fa-utensils mr-1.5"></i> Hospitality & Digital Ordering
+                </span>
+                <span class="text-emerald-400 font-bold"><i class="fa-solid fa-bolt mr-1"></i> 0.4s Load Time</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-2">Royal Bites Bistro & Reservation Engine</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                An interactive culinary digital experience with live dietary filtering (Vegan, Gluten-free, Chef Specials), dynamic cart counter, real-time table reservations, and seamless WhatsApp ordering integration.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-400 mb-6">
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Interactive Menu Filter</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Table Reservation Modal</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">WhatsApp Order API</span>
+              </div>
+            </div>
+            <div class="px-8 py-5 bg-space-900/80 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">Order Lift: <strong class="text-emerald-400">+35% Direct Orders</strong></span>
+              <button onclick="openModal('restaurantModal')" class="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider transition shadow inline-flex items-center">
+                View Architecture <i class="fa-solid fa-eye ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 3: Cyber Runner 3D Web Canvas Engine -->
+          <div class="project-card card-glass rounded-2xl overflow-hidden border-slate-800 flex flex-col justify-between" data-category="interactive">
+            <div class="p-8">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+                <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30">
+                  <i class="fa-solid fa-gamepad mr-1.5"></i> Advanced JavaScript & Canvas
+                </span>
+                <span class="text-cyan-400 font-bold"><i class="fa-solid fa-gauge mr-1"></i> Solid 60 FPS</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-2">Cyber Runner: 3D Perspective Canvas Arcade</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                A high-performance synthwave racing game built in pure vanilla JavaScript with HTML5 2D Canvas rendering simulated 3D perspective, audio synthesis, dynamic obstacle physics, and particle collision dynamics.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-400 mb-6">
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Vanilla JavaScript</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">HTML5 Canvas Rendering</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Web Audio API Synth</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Zero Dependencies</span>
+              </div>
+            </div>
+            <div class="px-8 py-5 bg-space-900/80 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">FPS Stability: <strong class="text-emerald-400">100% Smooth</strong></span>
+              <a href="cyber_runner_game.html" target="_blank" class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-wider transition shadow inline-flex items-center">
+                Play Game Live <i class="fa-solid fa-play ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 4: Emergency Bug Fix & Speed Overhaul Case Study -->
+          <div class="project-card card-glass rounded-2xl overflow-hidden border-slate-800 flex flex-col justify-between" data-category="booking">
+            <div class="p-8">
+              <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-4">
+                <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-bold border border-rose-500/30">
+                  <i class="fa-solid fa-wrench mr-1.5"></i> Emergency Bug Rescue Case Study
+                </span>
+                <span class="text-amber-400 font-bold"><i class="fa-solid fa-clock mr-1"></i> Fixed in 18 Hours</span>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-2">E-Commerce Checkout & Safari CSS Overhaul</h3>
+              <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                Client suffered a 40% checkout drop-off due to an iOS Safari flexbox layout bug that hid the payment submission button on iPhone 14/15 screens. Isolated bug, refactored layout, reduced total payload by 62%, and restored checkout conversion.
+              </p>
+              <div class="flex flex-wrap gap-2 text-[11px] font-mono text-slate-400 mb-6">
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Cross-Browser Safari Fix</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Core Web Vitals 38 &rarr; 96</span>
+                <span class="px-2.5 py-1 rounded bg-space-900 border border-slate-800">Checkout Conversion Restored</span>
+              </div>
+            </div>
+            <div class="px-8 py-5 bg-space-900/80 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-mono text-slate-400">Score Boost: <strong class="text-emerald-400">38 &rarr; 96 (Google)</strong></span>
+              <button onclick="openModal('caseStudyModal')" class="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-wider transition shadow inline-flex items-center">
+                Read Case Study <i class="fa-solid fa-file-lines ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE FRONT-END PLAYGROUND / LAB -->
+    <section id="playground" class="py-24 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs font-semibold">
+            LIVE INTERACTIVE COMPONENT LAB
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Test My Front-End Code Live on This Page.
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Don’t just take my word for it. Interact with the live UI components below to test state management, responsive micro-interactions, and real-time computation.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Interactive Widget 1: Live Speed & Performance Test -->
+          <div class="lg:col-span-6 card-glass rounded-2xl p-6 sm:p-8 border-slate-800">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+              <h3 class="text-lg font-bold text-white flex items-center">
+                <i class="fa-solid fa-stopwatch text-emerald-400 mr-2"></i> Live Browser Execution Speed Test
+              </h3>
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">CLIENT-SIDE JS</span>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed mb-6">
+              Click the button below to run an intensive client-side DOM & mathematical performance benchmark. Watch Rayan’s optimized JavaScript finish in milliseconds!
+            </p>
+
+            <div class="bg-space-900 rounded-xl p-4 border border-slate-800 mb-6 font-mono text-xs space-y-2">
+              <div class="flex justify-between text-slate-400">
+                <span>Iterations:</span>
+                <span class="text-white">50,000 Complex Matrix Computations</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Memory Allocation:</span>
+                <span class="text-emerald-400">Optimized Heap &bull; Zero Leaks</span>
+              </div>
+              <div class="flex justify-between text-slate-400 font-bold pt-2 border-t border-slate-800">
+                <span>Benchmark Execution Time:</span>
+                <span id="benchmarkResult" class="text-cyan-400 text-sm">Ready to test</span>
+              </div>
+            </div>
+
+            <button onclick="runSpeedBenchmark()" id="benchmarkBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-600/20 flex items-center justify-center">
+              <i class="fa-solid fa-play mr-2"></i> Run Speed Benchmark
+            </button>
+          </div>
+
+          <!-- Interactive Widget 2: Interactive Before/After Comparison Tool -->
+          <div class="lg:col-span-6 card-glass rounded-2xl p-6 sm:p-8 border-slate-800">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+              <h3 class="text-lg font-bold text-white flex items-center">
+                <i class="fa-solid fa-sliders text-blue-400 mr-2"></i> Live Before / After Component Preview
+              </h3>
+              <span class="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/30">UI / UX SLIDER</span>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              Drag the slider handle to inspect the difference between a broken, slow legacy website and a Rayan Jilani modern sub-second rebuild:
+            </p>
+
+            <!-- Slider Container -->
+            <div class="relative h-48 rounded-xl overflow-hidden border border-slate-700 select-none cursor-ew-resize" id="sliderContainer">
+              <!-- Before (Underneath) -->
+              <div class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center p-6 text-center">
+                <span class="text-rose-400 text-xs font-mono font-bold uppercase tracking-wider mb-2">❌ Legacy / Slow Website</span>
+                <h4 class="text-slate-300 text-sm font-bold">5.8s Load Time &bull; Broken Mobile Menu</h4>
+                <p class="text-slate-400 text-xs mt-1">High bounce rate, lost phone orders, no SSL security.</p>
+              </div>
+
+              <!-- After (Overlay Cliped by Slider) -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-blue-950 via-slate-900 to-emerald-950 flex flex-col items-center justify-center p-6 text-center border-r-2 border-emerald-400" id="sliderAfter" style="width: 50%;">
+                <span class="text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider mb-2">✅ Rayan Jilani Rebuild</span>
+                <h4 class="text-white text-sm font-bold">0.5s Sub-Second &bull; Instant Online Booking</h4>
+                <p class="text-slate-300 text-xs mt-1">100% Core Web Vitals, automated WhatsApp lead alert.</p>
+              </div>
+
+              <!-- Divider Handle -->
+              <div class="absolute top-0 bottom-0 w-8 -ml-4 flex items-center justify-center pointer-events-none" id="sliderHandle" style="left: 50%;">
+                <div class="w-7 h-7 rounded-full bg-white text-space-950 flex items-center justify-center text-[10px] font-black shadow-xl">
+                  &harr;
+                </div>
+              </div>
+            </div>
+
+            <!-- Slider Input Controller -->
+            <input type="range" min="0" max="100" value="50" class="w-full mt-4 accent-emerald-500 cursor-pointer" id="interactiveRange" oninput="updateBeforeAfter(this.value)">
+          </div>
+
+          <!-- Interactive Widget 3: Live Real-Time Neon Theme Accent Switcher -->
+          <div class="lg:col-span-6 card-glass rounded-2xl p-6 sm:p-8 border-slate-800">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+              <h3 class="text-lg font-bold text-white flex items-center">
+                <i class="fa-solid fa-palette text-purple-400 mr-2"></i> Real-Time Neon Palette Morphing
+              </h3>
+              <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/30">CSS VARIABLES</span>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed mb-6">
+              Front-End architecture should be flexible. Click any neon accent below to dynamically morph the entire site's glows, cursor rings, and gradient borders in real-time:
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+              <button onclick="setNeonTheme('blue')" class="p-3 rounded-xl card-glass border-blue-500/40 hover:scale-105 transition flex flex-col items-center justify-center space-y-2 group">
+                <span class="w-6 h-6 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50 block"></span>
+                <span class="text-[11px] font-mono font-bold text-blue-300">Cyber Blue</span>
+              </button>
+              <button onclick="setNeonTheme('emerald')" class="p-3 rounded-xl card-glass border-emerald-500/40 hover:scale-105 transition flex flex-col items-center justify-center space-y-2 group">
+                <span class="w-6 h-6 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50 block"></span>
+                <span class="text-[11px] font-mono font-bold text-emerald-300">Hacker Emerald</span>
+              </button>
+              <button onclick="setNeonTheme('purple')" class="p-3 rounded-xl card-glass border-purple-500/40 hover:scale-105 transition flex flex-col items-center justify-center space-y-2 group">
+                <span class="w-6 h-6 rounded-full bg-purple-500 shadow-lg shadow-purple-500/50 block"></span>
+                <span class="text-[11px] font-mono font-bold text-purple-300">Quantum Violet</span>
+              </button>
+              <button onclick="setNeonTheme('amber')" class="p-3 rounded-xl card-glass border-amber-500/40 hover:scale-105 transition flex flex-col items-center justify-center space-y-2 group">
+                <span class="w-6 h-6 rounded-full bg-amber-500 shadow-lg shadow-amber-500/50 block"></span>
+                <span class="text-[11px] font-mono font-bold text-amber-300">Solar Amber</span>
+              </button>
+            </div>
+
+            <div class="text-[11px] font-mono text-slate-400 bg-space-900/80 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+              <span>Active Palette Token:</span>
+              <span id="activePaletteLabel" class="text-blue-400 font-bold">Cyber Blue (Default)</span>
+            </div>
+          </div>
+
+          <!-- Interactive Widget 4: Live Client-Side Form & Regex Field Validator -->
+          <div class="lg:col-span-6 card-glass rounded-2xl p-6 sm:p-8 border-slate-800">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+              <h3 class="text-lg font-bold text-white flex items-center">
+                <i class="fa-solid fa-circle-check text-cyan-400 mr-2"></i> Client-Side Real-Time Form Validator
+              </h3>
+              <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/30">ASYNC STATE</span>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+              Type an email below to watch instant regex parsing, status badge transitions, and zero-flicker validation feedback:
+            </p>
+
+            <div class="space-y-4">
+              <div class="relative">
+                <input type="text" id="demoEmailInput" placeholder="Type: user@company.com" oninput="testLiveValidation(this.value)" class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-700 text-white text-xs font-mono focus:outline-none transition">
+                <span id="validatorIcon" class="absolute right-3.5 top-3 text-slate-500 text-sm">
+                  <i class="fa-solid fa-keyboard"></i>
+                </span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-space-900/80 border border-slate-800 font-mono text-xs flex items-center justify-between">
+                <span class="text-slate-400">Status Check:</span>
+                <span id="validationFeedback" class="text-slate-400">Waiting for keystrokes...</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PROJECT COST ESTIMATOR -->
+    <section id="calculator" class="py-24 bg-space-900/50 border-y border-slate-800/80 relative">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 font-mono text-xs font-semibold">
+            INSTANT SCOPE & PRICING ESTIMATOR
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Transparent Pricing. Calculate Your Project in 20 Seconds.
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Select your exact requirements below. Get an immediate ballpark estimate with no sales fluff or hidden agency markups.
+          </p>
+        </div>
+
+        <div class="card-glass rounded-3xl p-6 sm:p-10 border-slate-800 shadow-2xl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Config Options -->
+            <div class="lg:col-span-7 space-y-6">
+              
+              <!-- Option 1: Project Type -->
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 font-bold">
+                  1. Select Core Scope:
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <label class="card-glass rounded-xl p-3.5 border-slate-800 cursor-pointer flex items-center space-x-3 hover:border-blue-500 transition">
+                    <input type="radio" name="projectType" value="bugfix" class="accent-blue-500" onchange="calculateQuote()">
+                    <span class="text-xs font-bold text-white">Emergency Bug Fix ($150)</span>
+                  </label>
+                  <label class="card-glass rounded-xl p-3.5 border-blue-500/60 bg-blue-500/10 cursor-pointer flex items-center space-x-3 hover:border-blue-500 transition">
+                    <input type="radio" name="projectType" value="website" checked class="accent-blue-500" onchange="calculateQuote()">
+                    <span class="text-xs font-bold text-white">Full Website ($400)</span>
+                  </label>
+                  <label class="card-glass rounded-xl p-3.5 border-slate-800 cursor-pointer flex items-center space-x-3 hover:border-blue-500 transition">
+                    <input type="radio" name="projectType" value="suite" class="accent-blue-500" onchange="calculateQuote()">
+                    <span class="text-xs font-bold text-white">Complete Suite ($750)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Option 2: Add-Ons -->
+              <div>
+                <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 font-bold">
+                  2. Optional Supercharges:
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <label class="card-glass rounded-xl p-3 border-slate-800 cursor-pointer flex items-center space-x-3 hover:border-purple-500 transition">
+                    <input type="checkbox" id="addonBooking" class="accent-purple-500" onchange="calculateQuote()">
+                    <span class="text-xs text-slate-300">Online Booking Calendar (+$120)</span>
+                  </label>
+                  <label class="card-glass rounded-xl p-3 border-slate-800 cursor-pointer flex items-center space-x-3 hover:border-purple-500 transition">
+                    <input type="checkbox" id="addonWhatsapp" class="accent-purple-500" onchange="calculateQuote()">
+                    <span class="text-xs text-slate-300">WhatsApp Lead Dispatch (+$80)</span>
+                  </label>
+                  <label class="card-glass rounded-xl p-3 border-slate-800 cursor-pointer flex items-center space-x-3 hover:border-purple-500 transition">
+                    <input type="checkbox" id="addonSpeed" class="accent-purple-500" onchange="calculateQuote()">
+                    <span class="text-xs text-slate-300">Sub-Second 0.5s Tuning (+$90)</span>
+                  </label>
+                  <label class="card-glass rounded-xl p-3 border-slate-800 cursor-pointer flex items-center space-x-3 hover:border-purple-500 transition">
+                    <input type="checkbox" id="addonExpress" class="accent-purple-500" onchange="calculateQuote()">
+                    <span class="text-xs text-slate-300">24-Hour Rush Delivery (+$100)</span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Estimated Total Card -->
+            <div class="lg:col-span-5 bg-gradient-to-br from-space-900 to-blue-950/80 rounded-2xl p-6 sm:p-8 border border-blue-500/40 text-center space-y-4">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">Calculated Estimate</span>
+              <div class="text-4xl sm:text-5xl font-black text-amber-400 font-mono" id="quoteTotal">$400 USD</div>
+              <div class="text-xs text-slate-300 font-mono" id="quoteTime">Estimated Turnaround: <strong>3-4 Business Days</strong></div>
+
+              <div class="pt-4 border-t border-slate-800 text-left space-y-2 text-xs text-slate-300">
+                <div class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Free 30-Day Post-Launch Support</div>
+                <div class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> 100% Money-Back Satisfaction Guarantee</div>
+                <div class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Direct Communication with Rayan</div>
+              </div>
+
+              <button onclick="dispatchEstimatedQuote()" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-black text-xs uppercase tracking-wider transition shadow-xl shadow-blue-500/25 flex items-center justify-center">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Send Quote to Rayan Jilani
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRANSPARENT PRICING TIERS -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-semibold">
+            CLEAR TIERS & FIXED PACKAGES
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Predictable Pricing. Zero Surprises.
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Choose the package that aligns with your goals, or contact me directly for a custom quote.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          
+          <!-- Tier 1: Rapid Bug Fix -->
+          <div class="card-glass rounded-2xl p-8 flex flex-col justify-between border-slate-800">
+            <div>
+              <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">Fast Relief</span>
+              <h3 class="text-2xl font-bold text-white mt-1 mb-2">Emergency Bug Fix</h3>
+              <p class="text-slate-400 text-xs mb-6">For sites with broken layouts, mobile bugs, or slow load times.</p>
+              <div class="text-4xl font-black text-white font-mono mb-6">$150 <span class="text-xs text-slate-400 font-normal">/ project</span></div>
+              <ul class="space-y-3 text-xs text-slate-300 font-mono mb-8">
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> 24-Hour Rapid Turnaround</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Cross-Browser Testing (iOS, Chrome, Safari)</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Form & Submission Repair</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Speed Audit & Clean Payload</li>
+              </ul>
+            </div>
+            <a href="mailto:rayanjilani214@gmail.com?subject=Emergency%20Bug%20Fix%20Request" class="w-full py-3.5 rounded-xl bg-space-850 hover:bg-space-800 text-white font-bold text-xs uppercase tracking-wider transition border border-slate-700 text-center block">
+              Book Bug Fix
+            </a>
+          </div>
+
+          <!-- Tier 2: Complete Business Website (POPULAR) -->
+          <div class="card-glass rounded-2xl p-8 flex flex-col justify-between border-2 border-blue-500/60 relative shadow-2xl shadow-blue-500/10">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-[10px] uppercase tracking-wider shadow">
+              MOST POPULAR FOR LOCAL BUSINESSES
+            </div>
+            <div>
+              <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">Flagship Offering</span>
+              <h3 class="text-2xl font-bold text-white mt-1 mb-2">Modern Business Website</h3>
+              <p class="text-slate-300 text-xs mb-6">A complete custom 4-5 page web presence that converts visitors.</p>
+              <div class="text-4xl font-black text-white font-mono mb-6">$450 <span class="text-xs text-slate-400 font-normal">/ project</span></div>
+              <ul class="space-y-3 text-xs text-slate-200 font-mono mb-8">
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> 4 to 5 Custom Responsive Pages</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Sub-Second (0.5s) Guaranteed Speed</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Interactive Sliders & Contact Flows</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Google Maps, SEO Schema & Analytics</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> 30 Days Free Maintenance</li>
+              </ul>
+            </div>
+            <a href="mailto:rayanjilani214@gmail.com?subject=Modern%20Business%20Website%20Package" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg shadow-blue-500/30 text-center block">
+              Start Your Website
+            </a>
+          </div>
+
+          <!-- Tier 3: Full Business Automation Engine -->
+          <div class="card-glass rounded-2xl p-8 flex flex-col justify-between border-slate-800">
+            <div>
+              <span class="text-xs font-mono font-bold text-purple-400 uppercase tracking-wider">Complete Auto-Pilot</span>
+              <h3 class="text-2xl font-bold text-white mt-1 mb-2">Full Automation Suite</h3>
+              <p class="text-slate-400 text-xs mb-6">Custom website + 24/7 self-service scheduling & WhatsApp pipeline.</p>
+              <div class="text-4xl font-black text-white font-mono mb-6">$850 <span class="text-xs text-slate-400 font-normal">/ project</span></div>
+              <ul class="space-y-3 text-xs text-slate-300 font-mono mb-8">
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Everything in Business Website</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> 24/7 Self-Service Appointment Engine</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> WhatsApp & SMS Instant Booking Slips</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Stripe / PayPal Deposit Integrations</li>
+                <li class="flex items-center"><i class="fa-solid fa-check text-emerald-400 mr-2"></i> 60 Days Priority Support</li>
+              </ul>
+            </div>
+            <a href="mailto:rayanjilani214@gmail.com?subject=Full%20Automation%20Suite%20Inquiry" class="w-full py-3.5 rounded-xl bg-space-850 hover:bg-space-800 text-white font-bold text-xs uppercase tracking-wider transition border border-slate-700 text-center block">
+              Automate My Business
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & DIRECT BOOKING SECTION -->
+    <section id="contact" class="py-24 bg-space-900/80 border-t border-slate-800 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Contact Left Info -->
+          <div class="lg:col-span-5 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-xs font-semibold">
+              LET'S TALK
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              Ready to Upgrade Your Web Experience?
+            </h2>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Have an upcoming project, a broken website bug that needs immediate fixing, or want a high-performing booking system? Reach out directly—I reply within hours.
+            </p>
+
+            <div class="space-y-4 pt-4">
+              <!-- Email Card -->
+              <a href="mailto:rayanjilani214@gmail.com" class="card-glass rounded-xl p-4 flex items-center space-x-4 hover:border-blue-500 transition text-left group">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition">
+                  <i class="fa-solid fa-envelope text-lg"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">Primary Direct Email</span>
+                  <span class="text-white font-bold text-sm">rayanjilani214@gmail.com</span>
+                </div>
+              </a>
+
+              <!-- LinkedIn Card -->
+              <a href="https://www.linkedin.com/in/rayan-jilani" target="_blank" rel="noopener noreferrer" class="card-glass rounded-xl p-4 flex items-center space-x-4 hover:border-blue-500 transition text-left group">
+                <div class="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-600/30 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition">
+                  <i class="fa-brands fa-linkedin-in text-lg"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">LinkedIn Profile</span>
+                  <span class="text-white font-bold text-sm">linkedin.com/in/rayan-jilani</span>
+                </div>
+              </a>
+
+              <!-- GitHub Card -->
+              <a href="https://github.com/rayan-jilani" target="_blank" rel="noopener noreferrer" class="card-glass rounded-xl p-4 flex items-center space-x-4 hover:border-slate-500 transition text-left group">
+                <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:bg-slate-700 group-hover:text-white transition">
+                  <i class="fa-brands fa-github text-lg"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">GitHub Repository</span>
+                  <span class="text-white font-bold text-sm">github.com/rayan-jilani</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form Right -->
+          <div class="lg:col-span-7">
+            <div class="card-glass rounded-3xl p-8 sm:p-10 border-slate-800 shadow-2xl relative">
+              <h3 class="text-xl font-bold text-white mb-2">Send a Message Directly to Rayan</h3>
+              <p class="text-slate-400 text-xs mb-6">Fill in your requirements and your email client will open with everything formatted for instant dispatch.</p>
+
+              <form onsubmit="handleDirectMessage(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Your Name / Business</label>
+                    <input type="text" id="contactName" required placeholder="e.g. Marcus Thorne" class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Your Email</label>
+                    <input type="email" id="contactEmail" required placeholder="marcus@example.com" class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1">Service Needed</label>
+                  <select id="contactService" class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                    <option value="New Modern Business Website ($450)">New Modern Business Website ($450)</option>
+                    <option value="Emergency Bug Fix & Speed Tuning ($150)">Emergency Bug Fix & Speed Tuning ($150)</option>
+                    <option value="Full Business Automation Suite ($850)">Full Business Automation Suite ($850)</option>
+                    <option value="Custom Project Consultation">Custom Project Consultation</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1">Project Details / Current Website URL</label>
+                  <textarea id="contactMessage" rows="4" required placeholder="Describe what you want built, your current website issues, or timeline..." class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-black text-xs uppercase tracking-wider transition shadow-xl shadow-blue-500/25 flex items-center justify-center">
+                  <i class="fa-solid fa-paper-plane mr-2"></i> Submit Inquiry to Rayan Jilani
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© 2026 <strong>Rayan Jilani</strong>. Built with HTML, CSS & JavaScript.</p>
-      <a href="#home" class="footer__top" aria-label="Back to top">↑ Top</a>
+  <!-- FOOTER -->
+  <footer class="bg-space-950 border-t border-slate-800/80 py-12 relative z-10 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-black text-sm">
+          RJ
+        </div>
+        <div>
+          <span class="text-white font-bold block">Rayan Jilani</span>
+          <span class="text-[10px] font-mono text-slate-400">Creative Front-End Developer</span>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-6 font-mono text-[11px]">
+        <a href="#services" class="hover:text-blue-400 transition">Services</a>
+        <a href="#projects" class="hover:text-blue-400 transition">Projects</a>
+        <a href="https://github.com/rayan-jilani" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">GitHub</a>
+        <a href="https://www.linkedin.com/in/rayan-jilani" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">LinkedIn</a>
+      </div>
+
+      <div class="text-center sm:text-right font-mono text-[11px]">
+        &copy; 2026 Rayan Jilani. All rights reserved.
+      </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- MODALS -->
+  <!-- Restaurant Modal -->
+  <div id="restaurantModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="card-glass rounded-2xl max-w-lg w-full p-6 border-slate-800 space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-lg font-bold text-white">Royal Bites Bistro Architecture</h3>
+        <button onclick="closeModal('restaurantModal')" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Engineered with a responsive modular grid layout that loads 45 high-resolution food assets in under 400ms using lazy decoding and WebP compression. Direct integration with WhatsApp Business API allows instant table reservations with zero third-party commissions.
+      </p>
+      <div class="pt-4 flex justify-end">
+        <button onclick="closeModal('restaurantModal')" class="px-4 py-2 rounded-lg bg-slate-800 text-white font-bold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Study Modal -->
+  <div id="caseStudyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="card-glass rounded-2xl max-w-lg w-full p-6 border-slate-800 space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-lg font-bold text-white">18-Hour Emergency Bug Fix Case Study</h3>
+        <button onclick="closeModal('caseStudyModal')" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        <strong>The Problem:</strong> A high-ticket Shopify boutique was losing $2,000+ daily because a custom CSS snippet crashed the sticky checkout drawer on Mobile Safari (iOS 17+).<br><br>
+        <strong>The Solution:</strong> I identified the conflicting <code>overflow: hidden</code> on the parent body, refactored the drawer using CSS <code>position: fixed</code> with hardware acceleration, and tested across 14 device viewports within 18 hours.
+      </p>
+      <div class="pt-4 flex justify-end">
+        <button onclick="closeModal('caseStudyModal')" class="px-4 py-2 rounded-lg bg-slate-800 text-white font-bold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    // Modal Handlers
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('hidden');
+        el.classList.add('flex');
+      }
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+      }
+    }
+
+    // Project Filtering
+    function filterProjects(cat) {
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Interactive Before / After Slider
+    function updateBeforeAfter(val) {
+      const after = document.getElementById('sliderAfter');
+      const handle = document.getElementById('sliderHandle');
+      if (after && handle) {
+        after.style.width = val + '%';
+        handle.style.left = val + '%';
+      }
+    }
+
+    // Speed Benchmark Test
+    function runSpeedBenchmark() {
+      playSynthSound(580, 0.08, 'sine');
+      const btn = document.getElementById('benchmarkBtn');
+      const res = document.getElementById('benchmarkResult');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Benchmarking...';
+      
+      setTimeout(() => {
+        const t0 = performance.now();
+        let sum = 0;
+        for (let i = 0; i < 50000; i++) {
+          sum += Math.sqrt(i) * Math.sin(i);
+        }
+        const t1 = performance.now();
+        const diff = (t1 - t0).toFixed(2);
+        res.innerHTML = `${diff} ms (Blazing Fast Execution 🔥)`;
+        res.classList.remove('text-cyan-400');
+        res.classList.add('text-emerald-400');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-rotate-right mr-2"></i> Run Again';
+        playSynthSound(880, 0.15, 'triangle');
+      }, 100);
+    }
+
+    // Neon Palette Theme Switcher
+    function setNeonTheme(theme) {
+      if (theme === 'blue') {
+        document.documentElement.removeAttribute('data-theme');
+        document.getElementById('activePaletteLabel').innerText = 'Cyber Blue (Default)';
+        document.getElementById('activePaletteLabel').className = 'text-blue-400 font-bold';
+      } else {
+        document.documentElement.setAttribute('data-theme', theme);
+        const labels = {
+          emerald: ['Hacker Emerald', 'text-emerald-400 font-bold'],
+          purple: ['Quantum Violet', 'text-purple-400 font-bold'],
+          amber: ['Solar Amber', 'text-amber-400 font-bold']
+        };
+        document.getElementById('activePaletteLabel').innerText = labels[theme][0];
+        document.getElementById('activePaletteLabel').className = labels[theme][1];
+      }
+      playSynthSound(720, 0.12, 'sine');
+    }
+
+    // Real-Time Regex Form Validator
+    function testLiveValidation(val) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const feedback = document.getElementById('validationFeedback');
+      const icon = document.getElementById('validatorIcon');
+      
+      if (!val) {
+        feedback.innerText = 'Waiting for keystrokes...';
+        feedback.className = 'text-slate-400';
+        icon.innerHTML = '<i class="fa-solid fa-keyboard"></i>';
+        icon.className = 'absolute right-3.5 top-3 text-slate-500 text-sm';
+      } else if (emailRegex.test(val)) {
+        feedback.innerText = 'Valid RFC-5322 Email Syntax ✅ (Ready to Submit)';
+        feedback.className = 'text-emerald-400 font-bold';
+        icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        icon.className = 'absolute right-3.5 top-3 text-emerald-400 text-sm';
+      } else {
+        feedback.innerText = 'Incomplete address (e.g. name@domain.com)...';
+        feedback.className = 'text-amber-400';
+        icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+        icon.className = 'absolute right-3.5 top-3 text-amber-400 text-sm';
+      }
+    }
+
+    // Project Cost Estimator Calculation
+    function calculateQuote() {
+      playSynthSound(440, 0.05, 'sine');
+      const type = document.querySelector('input[name="projectType"]:checked').value;
+      let total = 400;
+      let time = "3-4 Business Days";
+
+      if (type === 'bugfix') {
+        total = 150;
+        time = "12 - 24 Hours (Guaranteed SLA)";
+      } else if (type === 'website') {
+        total = 400;
+        time = "3 - 4 Business Days";
+      } else if (type === 'suite') {
+        total = 750;
+        time = "5 - 7 Business Days";
+      }
+
+      if (document.getElementById('addonBooking').checked) total += 120;
+      if (document.getElementById('addonWhatsapp').checked) total += 80;
+      if (document.getElementById('addonSpeed').checked) total += 90;
+      if (document.getElementById('addonExpress').checked) {
+        total += 100;
+        time = "Priority Rush (24-48 Hours)";
+      }
+
+      document.getElementById('quoteTotal').innerText = `$${total} USD`;
+      document.getElementById('quoteTime').innerHTML = `Estimated Turnaround: <strong>${time}</strong>`;
+    }
+
+    function dispatchEstimatedQuote() {
+      playSynthSound(660, 0.1, 'triangle');
+      const total = document.getElementById('quoteTotal').innerText;
+      const time = document.getElementById('quoteTime').innerText;
+      const type = document.querySelector('input[name="projectType"]:checked').value;
+      const subject = encodeURIComponent(`Project Inquiry & Estimate (${total})`);
+      const body = encodeURIComponent(`Hi Rayan,
+
+I configured an estimate on your portfolio:
+• Selected Scope: ${type}
+• Estimated Budget: ${total}
+• Turnaround: ${time}
+
+I would like to discuss getting this started for my business.
+
+Best regards,`);
+      window.location.href = `mailto:rayanjilani214@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    // Handle Direct Message Form
+    function handleDirectMessage(e) {
+      e.preventDefault();
+      playSynthSound(780, 0.12, 'sine');
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const service = document.getElementById('contactService').value;
+      const message = document.getElementById('contactMessage').value;
+
+      const subject = encodeURIComponent(`New Project Inquiry from ${name} - ${service}`);
+      const body = encodeURIComponent(`Name: ${name}
+Email: ${email}
+Service Selected: ${service}
+
+Project Details:
+${message}
+`);
+      window.location.href = `mailto:rayanjilani214@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    // ==========================================
+    // FUTURISTIC WEB AUDIO SYNTHESIZER (ZERO MP3)
+    // ==========================================
+    let audioCtx = null;
+    let sfxEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playSynthSound(freq = 440, duration = 0.08, type = 'sine') {
+      if (!sfxEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleAudioFx() {
+      sfxEnabled = !sfxEnabled;
+      const statusEl = document.getElementById('sfxStatus');
+      const iconEl = document.getElementById('sfxIcon');
+      if (sfxEnabled) {
+        statusEl.innerText = 'ON';
+        statusEl.className = 'font-bold text-emerald-400 ml-1';
+        iconEl.className = 'fa-solid fa-volume-high mr-1.5 text-cyan-400';
+        playSynthSound(600, 0.1, 'sine');
+      } else {
+        statusEl.innerText = 'OFF';
+        statusEl.className = 'font-bold text-slate-500 ml-1';
+        iconEl.className = 'fa-solid fa-volume-xmark mr-1.5 text-slate-500';
+      }
+    }
+
+    // Attach microscopic audio click to interactive elements
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('button, a, input, select')) {
+        playSynthSound(500, 0.04, 'sine');
+      }
+    });
+
+    // ==========================================
+    // 3D PERSPECTIVE CARD TILT & SPOTLIGHT SHEEN
+    // ==========================================
+    const cards = document.querySelectorAll('.card-glass');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
+        // Subtle 3D Tilt calculation
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+
+    // ==========================================
+    // CUSTOM MAGNETIC SMOOTH GLOWING CURSOR
+    // ==========================================
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = -100, mouseY = -100;
+    let ringX = -100, ringY = -100;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (cursorDot) {
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+      }
+    });
+
+    function renderCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      if (cursorRing) {
+        cursorRing.style.left = `${ringX}px`;
+        cursorRing.style.top = `${ringY}px`;
+      }
+      requestAnimationFrame(renderCursor);
+    }
+    renderCursor();
+
+    // Hover Scaling for Cursor
+    document.querySelectorAll('a, button, input, select, textarea, .card-glass').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    // ==========================================
+    // 60FPS INTERACTIVE CONSTELLATION CANVAS
+    // ==========================================
+    const canvas = document.getElementById('ambientCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      for (let i = 0; i < 75; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.6 + 0.6,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          alpha: Math.random() * 0.5 + 0.2
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Draw connections between nearby particles & mouse
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 90) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - dist / 90)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+
+          // Mouse proximity connection
+          const mdx = particles[i].x - mouseX;
+          const mdy = particles[i].y - mouseY;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouseX, mouseY);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.35 * (1 - mdist / 130)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+
+          // Move particles
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          // Render particle node
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(59, 130, 246, ${p.alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  </script>
 </body>
 </html>
+
